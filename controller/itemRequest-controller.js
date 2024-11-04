@@ -1,9 +1,15 @@
 const ItemRequest = require("../model/ItemRequest");
 
-const getAllItemRequests  = async (req,res,next)=>{
+const getItemRequests  = async (req,res,next)=>{
+    const id = req.params.id;
     let itemRequests;
     try{
-        itemRequests = await ItemRequest.find();
+        if(id){
+            itemRequests =  await ItemRequest.findById(id);
+        }
+        else{
+            itemRequests = await ItemRequest.find();
+        }
     } catch(err){
         return next(err)
     }
@@ -81,7 +87,7 @@ const deleteItemRequest = async (req,res,next) =>{
     return res.status(200).json({message: "User Deleted Successfully" });
 }
 
-exports.getAllItemRequests = getAllItemRequests;
+exports.getItemRequests = getItemRequests;
 exports.postItemRequest = postItemRequest;
 exports.updateItemRequest = updateItemRequest;
 exports.deleteItemRequest = deleteItemRequest;
