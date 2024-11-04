@@ -7,7 +7,7 @@ const router = require('./routes/itemrequest-routes,');
 const app = express();
 
 app.use(express.json());
-app.use("/" , router);
+app.use("/api" , router);
 
 mongoose.connect(
     "mongodb+srv://homewithoutbordersfl:sheharoz123@hwbcluster.qgtje.mongodb.net/?retryWrites=true&w=majority&appName=hwbcluster"
