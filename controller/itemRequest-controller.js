@@ -53,7 +53,6 @@ const updateItemRequest = async (req,res,next) =>{
 
     try{
         itemRequest = await ItemRequest.findByIdAndUpdate(id, {name,mobileNo,address,items});
-        itemRequest
     }catch( err){
         return next(err);
     }
@@ -65,6 +64,24 @@ const updateItemRequest = async (req,res,next) =>{
     return res.status(200).json({message: "User Updated Successfully" });
 }
 
+const deleteItemRequest = async (req,res,next) =>{
+    const id = req.params.id;
+    let itemRequest;
+
+    try{
+        itemRequest = await ItemRequest.findByIdAndDelete(id);
+    }catch( err){
+        return next(err);
+    }
+
+    if(!itemRequest){
+        return res.status(500).json({message: "Couldn't delete Item Request"});
+    }
+
+    return res.status(200).json({message: "User Deleted Successfully" });
+}
+
 exports.getAllItemRequests = getAllItemRequests;
 exports.postItemRequest = postItemRequest;
 exports.updateItemRequest = updateItemRequest;
+exports.deleteItemRequest = deleteItemRequest;
