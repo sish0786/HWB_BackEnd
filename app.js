@@ -1,13 +1,15 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const router = require('./routes/itemrequest-routes');
+const itemsrouter = require('./routes/itemrequest-routes');
+const airportrouter = require('./routes/airportPickup-routes');
 
 
 
 const app = express();
 
 app.use(express.json());
-app.use("/api" , router);
+app.use("/api" , itemsrouter);
+app.use("/api" , airportrouter);
 
 mongoose.connect(
     "mongodb+srv://homewithoutbordersfl:sheharoz123@hwbcluster.qgtje.mongodb.net/?retryWrites=true&w=majority&appName=hwbcluster"
