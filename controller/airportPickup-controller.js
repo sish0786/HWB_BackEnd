@@ -45,5 +45,23 @@ const postAirportPickup  = async (req,res,next)=>{
     return res.status(201).json({airportPickup});
 }
 
+const deleteAirportPickup = async (req,res,next) =>{
+    const id = req.params.id;
+    let airportPickup;
+
+    try{
+        airportPickup = await AirportPickup.findByIdAndDelete(id);
+    }catch( err){
+        return next(err);
+    }
+
+    if(!airportPickup){
+        return res.status(500).json({message: "Couldn't delete Airport Pickup Request"});
+    }
+
+    return res.status(200).json({message: "Pickup Cancelled Successfully" });
+}
+
 exports.getAirportPickups = getAirportPickups;
 exports.postAirportPickup = postAirportPickup;
+exports.deleteAirportPickup = deleteAirportPickup;
